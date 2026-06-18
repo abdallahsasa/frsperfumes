@@ -12,7 +12,7 @@
         
         <!-- Slide 1: Noir Étoile -->
         <div x-show="activeSlide === 0" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.9)), url('{{ asset('storage/banners/banner1.jpg') }}');"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.9)), url('{{ asset('uploads/banners/banner1.jpg') }}');"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center space-y-6">
                 <span class="text-gold-400 tracking-[0.3em] text-[10px] sm:text-xs font-bold uppercase">
                     {{ app()->getLocale() === 'ar' ? 'العطور الفاخرة المميزة' : 'EXQUISITE NICHE COLLECTION' }}
@@ -33,7 +33,7 @@
 
         <!-- Slide 2: The Golden Guarantee -->
         <div x-show="activeSlide === 1" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0" style="display: none;">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.9)), url('{{ asset('storage/banners/banner2.jpg') }}');"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.9)), url('{{ asset('uploads/banners/banner2.jpg') }}');"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center space-y-6">
                 <span class="text-gold-400 tracking-[0.3em] text-[10px] sm:text-xs font-bold uppercase">
                     {{ app()->getLocale() === 'ar' ? 'تسوق بثقة تامة' : 'SHOP WITH ABSOLUTE CONFIDENCE' }}
@@ -111,7 +111,7 @@
                     <!-- Image Area -->
                     <div class="relative w-full aspect-square bg-transparent overflow-hidden mb-6 flex items-center justify-center p-4">
                         @if($perfume->images->count() > 0)
-                            <img src="{{ asset('storage/' . $perfume->images->first()->image_path) }}" alt="{{ $perfume->name }}" class="h-full w-full object-contain object-center scale-95 group-hover:scale-100 transition-transform duration-500">
+                            <img src="{{ asset('uploads/' . $perfume->images->first()->image_path) }}" alt="{{ $perfume->name }}" class="h-full w-full object-contain object-center scale-95 group-hover:scale-100 transition-transform duration-500">
                         @else
                             <div class="flex h-full w-full items-center justify-center bg-matte-black text-gray-700">
                                 <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -210,7 +210,7 @@
                 <!-- Slide 1 -->
                 <div x-show="activeTip === 0" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-x-8 rtl:-translate-x-8" x-transition:enter-end="opacity-100 translate-x-0" class="w-full flex flex-col md:flex-row gap-8 items-center" style="display: none;">
                     <div class="w-full md:w-1/2 aspect-[4/3] bg-[#0c0c0d] overflow-hidden rounded-sm border border-charcoal">
-                        <img src="{{ asset('storage/tips/tip1.jpg') }}" alt="Pulse Points" class="h-full w-full object-cover">
+                        <img src="{{ asset('uploads/tips/tip1.jpg') }}" alt="Pulse Points" class="h-full w-full object-cover">
                     </div>
                     <div class="w-full md:w-1/2 space-y-4 text-center md:text-left rtl:md:text-right">
                         <span class="text-gold-400 text-[10px] font-bold tracking-widest uppercase">Tip #01</span>
@@ -228,7 +228,7 @@
                 <!-- Slide 2 -->
                 <div x-show="activeTip === 1" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-x-8 rtl:-translate-x-8" x-transition:enter-end="opacity-100 translate-x-0" class="w-full flex flex-col md:flex-row gap-8 items-center" style="display: none;">
                     <div class="w-full md:w-1/2 aspect-[4/3] bg-[#0c0c0d] overflow-hidden rounded-sm border border-charcoal">
-                        <img src="{{ asset('storage/tips/tip2.jpg') }}" alt="Don't Rub Wrists" class="h-full w-full object-cover">
+                        <img src="{{ asset('uploads/tips/tip2.jpg') }}" alt="Don't Rub Wrists" class="h-full w-full object-cover">
                     </div>
                     <div class="w-full md:w-1/2 space-y-4 text-center md:text-left rtl:md:text-right">
                         <span class="text-gold-400 text-[10px] font-bold tracking-widest uppercase">Tip #02</span>
@@ -246,7 +246,7 @@
                 <!-- Slide 3 -->
                 <div x-show="activeTip === 2" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-x-8 rtl:-translate-x-8" x-transition:enter-end="opacity-100 translate-x-0" class="w-full flex flex-col md:flex-row gap-8 items-center" style="display: none;">
                     <div class="w-full md:w-1/2 aspect-[4/3] bg-[#0c0c0d] overflow-hidden rounded-sm border border-charcoal">
-                        <img src="{{ asset('storage/tips/tip3.jpg') }}" alt="Store properly" class="h-full w-full object-cover">
+                        <img src="{{ asset('uploads/tips/tip3.jpg') }}" alt="Store properly" class="h-full w-full object-cover">
                     </div>
                     <div class="w-full md:w-1/2 space-y-4 text-center md:text-left rtl:md:text-right">
                         <span class="text-gold-400 text-[10px] font-bold tracking-widest uppercase">Tip #03</span>

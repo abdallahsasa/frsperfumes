@@ -69,7 +69,7 @@ class Perfume extends Model
     public function getPrimaryImageUrlAttribute(): string
     {
         $primary = $this->images->firstWhere('is_primary', true) ?: $this->images->first();
-        return $primary ? asset('storage/' . $primary->image_path) : asset('images/placeholder-perfume.jpg');
+        return $primary ? asset('uploads/' . $primary->image_path) : asset('images/placeholder-perfume.jpg');
     }
 
     public function notes(): BelongsToMany

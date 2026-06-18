@@ -20,7 +20,7 @@
                     class="relative w-full aspect-square bg-[#161618] border border-charcoal/60 rounded-sm overflow-hidden flex items-center justify-center p-8 group">
                     @if(!empty($activeImage))
                         <!-- Image with subtle hover zoom effect -->
-                        <img src="{{ asset('storage/' . $activeImage) }}" alt="{{ $perfume->name }}"
+                        <img src="{{ asset('uploads/' . $activeImage) }}" alt="{{ $perfume->name }}"
                             class="h-full w-full object-contain max-h-[450px] transition-transform duration-500 group-hover:scale-105">
                     @else
                         <svg class="h-24 w-24 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +43,7 @@
                         @foreach($perfume->images as $img)
                             <button wire:click="selectImage('{{ $img->image_path }}')"
                                 class="flex-shrink-0 w-20 h-20 bg-[#161618] border {{ $activeImage === $img->image_path ? 'border-gold-400' : 'border-charcoal/60' }} hover:border-gold-400 p-2 rounded-sm transition-all overflow-hidden flex items-center justify-center">
-                                <img src="{{ asset('storage/' . $img->image_path) }}" alt="Thumbnail"
+                                <img src="{{ asset('uploads/' . $img->image_path) }}" alt="Thumbnail"
                                     class="h-full w-full object-contain">
                             </button>
                         @endforeach

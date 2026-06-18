@@ -32,7 +32,7 @@
                 <!-- Branding & Story -->
                 <div class="col-span-1 md:col-span-2 space-y-4">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('storage/logo.webp') }}" alt="FRS PERFUMES Logo" class="h-10 w-auto">
+                        <img src="{{ asset('uploads/logo.webp') }}" alt="FRS PERFUMES Logo" class="h-10 w-auto">
                         <span class="font-display text-xl font-bold tracking-widest text-gold-400">FRS PERFUMES</span>
                     </div>
                     <p class="text-sm max-w-md">

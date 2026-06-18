@@ -110,7 +110,7 @@
                             <!-- Image Area -->
                             <div class="relative w-full aspect-square bg-transparent overflow-hidden mb-4 p-4 flex items-center justify-center">
                                 @if($perfume->images->count() > 0)
-                                    <img src="{{ asset('storage/' . $perfume->images->first()->image_path) }}" alt="{{ $perfume->name }}" class="h-full w-full object-contain object-center scale-95 group-hover:scale-100 transition-transform duration-500">
+                                    <img src="{{ asset('uploads/' . $perfume->images->first()->image_path) }}" alt="{{ $perfume->name }}" class="h-full w-full object-contain object-center scale-95 group-hover:scale-100 transition-transform duration-500">
                                 @else
                                     <div class="flex h-full w-full items-center justify-center bg-matte-black text-gray-700">
                                         <svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
