@@ -9,6 +9,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Models\Perfume;
+use Filament\Forms\Set;
+use Filament\Forms\Get;
 
 class OrderResource extends Resource
 {
@@ -59,7 +62,9 @@ class OrderResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('order_number')
                                     ->disabled()
-                                    ->dehydrated(false)
+                                    ->dehydrated(true)
+                                    ->default(fn () => 'ORD-' . strtoupper(uniqid()))
+                                    ->unique(ignoreRecord: true)
                                     ->required(),
                                 Forms\Components\Select::make('status')
                                     ->options([
@@ -71,10 +76,9 @@ class OrderResource extends Resource
                                     ->required()
                                     ->native(false),
                                 Forms\Components\TextInput::make('total_price')
-                                    ->disabled()
-                                    ->dehydrated(false)
                                     ->numeric()
                                     ->prefix('$')
+                                    ->default(0)
                                     ->required(),
                             ])
                             ->columnSpan(1),
@@ -85,27 +89,61 @@ class OrderResource extends Resource
                                 Forms\Components\Repeater::make('items')
                                     ->relationship('items')
                                     ->schema([
+                                        Forms\Components\Select::make('perfume_id')
+                                            ->label('Select Perfume')
+                                            ->options(Perfume::query()->pluck('name_en', 'id'))
+                                            ->searchable()
+                                            ->required()
+                                            ->live()
+                                            ->afterStateUpdated(function ($state, Set $set) {
+                                                if ($state) {
+                                                    $perfume = Perfume::with('brand')->find($state);
+                                                    if ($perfume) {
+                                                        $set('perfume_name', $perfume->name_en);
+                                                        $set('brand_name', $perfume->brand?->name ?? 'Unknown');
+                                                        $set('size_ml', $perfume->size_ml);
+                                                        $set('price', $perfume->price);
+                                                    }
+                                                }
+                                            }),
                                         Forms\Components\TextInput::make('brand_name')
                                             ->label('Brand')
-                                            ->disabled(),
+                                            ->readOnly()
+                                            ->required(),
                                         Forms\Components\TextInput::make('perfume_name')
                                             ->label('Perfume')
-                                            ->disabled(),
+                                            ->readOnly()
+                                            ->required(),
                                         Forms\Components\TextInput::make('size_ml')
                                             ->label('Size (ml)')
                                             ->numeric()
-                                            ->disabled(),
+                                            ->readOnly(),
                                         Forms\Components\TextInput::make('quantity')
                                             ->numeric()
-                                            ->disabled(),
+                                            ->default(1)
+                                            ->minValue(1)
+                                            ->live(debounce: 500)
+                                            ->required(),
                                         Forms\Components\TextInput::make('price')
                                             ->numeric()
-                                            ->prefix('$')
-                                            ->disabled(),
+                                            ->live(debounce: 500)
+                                            ->required(),
                                     ])
-                                    ->columns(5)
-                                    ->addable(false)
-                                    ->deletable(false)
+                                    ->columns(3)
+                                    ->defaultItems(1)
+                                    ->live()
+                                    ->afterStateUpdated(function (Get $get, Set $set) {
+                                        $items = $get('items');
+                                        $total = 0;
+                                        if (is_array($items)) {
+                                            foreach ($items as $item) {
+                                                $price = floatval($item['price'] ?? 0);
+                                                $qty = intval($item['quantity'] ?? 1);
+                                                $total += $price * $qty;
+                                            }
+                                        }
+                                        $set('total_price', $total);
+                                    })
                                     ->columnSpanFull(),
                             ])
                             ->columnSpanFull(),
