@@ -22,6 +22,9 @@
                 <a href="{{ route('shop') }}" class="text-xs uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('shop') ? 'text-gold-400' : 'text-gray-300 hover:text-gold-400' }} transition-colors">
                     {{ __('messages.shop') }}
                 </a>
+                <a href="{{ route('brands') }}" class="text-xs uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('brands') ? 'text-gold-400' : 'text-gray-300 hover:text-gold-400' }} transition-colors">
+                    {{ app()->getLocale() === 'ar' ? 'العلامات التجارية' : 'Brands' }}
+                </a>
                 <a href="{{ route('cart') }}" class="text-xs uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('cart') ? 'text-gold-400' : 'text-gray-300 hover:text-gold-400' }} transition-colors">
                     {{ __('messages.cart') }}
                 </a>
@@ -76,6 +79,9 @@
             </a>
             <a href="{{ route('shop') }}" class="text-sm uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('shop') ? 'text-gold-400' : 'text-gray-300' }} hover:text-gold-400 transition-colors py-3 border-b border-charcoal/30 block">
                 {{ __('messages.shop') }}
+            </a>
+            <a href="{{ route('brands') }}" class="text-sm uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('brands') ? 'text-gold-400' : 'text-gray-300' }} hover:text-gold-400 transition-colors py-3 border-b border-charcoal/30 block">
+                {{ app()->getLocale() === 'ar' ? 'العلامات التجارية' : 'Brands' }}
             </a>
             <a href="{{ route('cart') }}" class="text-sm uppercase tracking-[0.15em] font-semibold {{ request()->routeIs('cart') ? 'text-gold-400' : 'text-gray-300' }} hover:text-gold-400 transition-colors py-3 block">
                 {{ __('messages.cart') }}

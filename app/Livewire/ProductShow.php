@@ -47,6 +47,10 @@ class ProductShow extends Component
 
     public function addToCart(CartService $cartService): void
     {
+        if ($this->perfume->stock_status === 'out_of_stock') {
+            return;
+        }
+
         $cartService->add($this->perfume->id, $this->quantity);
         $this->dispatch('cartUpdated');
 

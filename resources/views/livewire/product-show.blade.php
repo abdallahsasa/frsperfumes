@@ -29,11 +29,16 @@
                         </svg>
                     @endif
 
-                    @if($perfume->pre_order)
-                        <span
-                            class="absolute top-4 left-4 rtl:left-auto rtl:right-4 text-[9px] font-bold tracking-widest uppercase bg-gold-gradient text-black px-3 py-1 rounded-sm shadow-md">
-                            {{ __('messages.pre_order') }}
-                        </span>
+                    @if($perfume->pre_order || $perfume->stock_status === 'pre_order')
+                        <div class="absolute top-4 left-4 rtl:left-auto rtl:right-4 z-10 flex items-center gap-2">
+                            <span class="relative flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-gold-500"></span>
+                            </span>
+                            <span class="text-[10px] font-bold tracking-[0.2em] uppercase bg-matte-black/80 backdrop-blur-md border border-gold-400 text-gold-400 px-3 py-1.5 rounded-sm shadow-xl">
+                                {{ __('messages.pre_order') }}
+                            </span>
+                        </div>
                     @endif
                 </div>
 
@@ -134,11 +139,19 @@
                             class="px-3 py-2 text-gray-400 hover:text-white transition-colors">&plus;</button>
                     </div>
 
-                    <button wire:click="addToCart"
-                        class="bg-gold-gradient text-black font-bold text-xs tracking-widest uppercase px-8 py-3.5 hover:opacity-90 active:scale-[0.98] transition-all rounded-sm flex items-center gap-2 shadow-lg">
-                        <span>🛒</span>
-                        <span>{{ __('messages.add_to_cart') }}</span>
-                    </button>
+                    @if($perfume->stock_status === 'out_of_stock')
+                        <button disabled
+                            class="bg-charcoal/50 text-gray-500 font-bold text-xs tracking-widest uppercase px-8 py-3.5 rounded-sm flex items-center gap-2 cursor-not-allowed">
+                            <span>🚫</span>
+                            <span>{{ app()->getLocale() === 'ar' ? 'نفذت الكمية' : 'Out of Stock' }}</span>
+                        </button>
+                    @else
+                        <button wire:click="addToCart"
+                            class="bg-gold-gradient text-black font-bold text-xs tracking-widest uppercase px-8 py-3.5 hover:opacity-90 active:scale-[0.98] transition-all rounded-sm flex items-center gap-2 shadow-lg">
+                            <span>🛒</span>
+                            <span>{{ $perfume->pre_order || $perfume->stock_status === 'pre_order' ? (app()->getLocale() === 'ar' ? 'اطلب مسبقاً' : 'Pre-order Now') : __('messages.add_to_cart') }}</span>
+                        </button>
+                    @endif
                 </div>
             </div>
 

@@ -119,10 +119,16 @@
                                     </div>
                                 @endif
 
-                                @if($perfume->pre_order)
-                                    <span class="absolute top-2 left-2 rtl:left-auto rtl:right-2 text-[9px] font-bold tracking-widest uppercase bg-gold-400 text-black px-2 py-0.5 rounded-sm">
-                                        {{ __('messages.pre_order') }}
-                                    </span>
+                                @if($perfume->pre_order || $perfume->stock_status === 'pre_order')
+                                    <div class="absolute top-2 left-2 rtl:left-auto rtl:right-2 z-10 flex items-center gap-1.5">
+                                        <span class="relative flex h-2 w-2">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-500"></span>
+                                        </span>
+                                        <span class="text-[8px] font-bold tracking-[0.2em] uppercase bg-matte-black/90 backdrop-blur-sm border border-gold-400 text-gold-400 px-2 py-1 rounded-sm shadow-lg">
+                                            {{ __('messages.pre_order') }}
+                                        </span>
+                                    </div>
                                 @endif
 
                                 @if($perfume->gender)
@@ -162,9 +168,15 @@
                                         </span>
                                     </div>
                                     
-                                    <a href="{{ route('perfume.show', $perfume->slug) }}" class="block w-full border border-gold-400/30 hover:border-gold-400/80 text-center font-semibold text-[10px] tracking-widest uppercase text-white hover:text-black hover:bg-gold-gradient py-2.5 transition-all duration-300 rounded-sm">
-                                        {{ app()->getLocale() === 'ar' ? 'تفاصيل العطر' : 'View Fragrance' }}
-                                    </a>
+                                    @if($perfume->stock_status === 'out_of_stock')
+                                        <div class="block w-full border border-charcoal bg-charcoal/30 text-center font-semibold text-[10px] tracking-widest uppercase text-gray-500 py-2.5 rounded-sm cursor-not-allowed">
+                                            {{ app()->getLocale() === 'ar' ? 'نفذت الكمية' : 'Out of Stock' }}
+                                        </div>
+                                    @else
+                                        <a href="{{ route('perfume.show', $perfume->slug) }}" class="block w-full border border-gold-400/30 hover:border-gold-400/80 text-center font-semibold text-[10px] tracking-widest uppercase text-white hover:text-black hover:bg-gold-gradient py-2.5 transition-all duration-300 rounded-sm">
+                                            {{ $perfume->pre_order || $perfume->stock_status === 'pre_order' ? (app()->getLocale() === 'ar' ? 'اطلب مسبقاً' : 'Pre-order') : __('messages.view_details') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

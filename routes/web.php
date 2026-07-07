@@ -14,6 +14,7 @@ use App\Livewire\CartCheckout;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/shop', Catalog::class)->name('shop');
+Route::get('/brands', \App\Livewire\BrandsIndex::class)->name('brands');
 Route::get('/perfume/{slug}', ProductShow::class)->name('perfume.show');
 Route::get('/cart', CartCheckout::class)->name('cart');
 
