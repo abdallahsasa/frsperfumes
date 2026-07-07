@@ -26,6 +26,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('frsperfumes panel')
+            ->favicon(asset('favicon.png'))
             ->login()
             ->colors([
                 'primary' => Color::Amber,

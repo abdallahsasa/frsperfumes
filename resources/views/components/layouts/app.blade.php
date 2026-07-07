@@ -11,6 +11,8 @@
     <meta name="description"
         content="{{ \App\Models\Setting::getValue('brand_story_' . app()->getLocale(), 'FRS Perfumes Luxury Fragrances') }}">
 
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
     <!-- SEO Meta tags -->
     <meta property="og:title"
         content="{{ \App\Models\Setting::getValue('site_title_' . app()->getLocale(), 'FRS Perfumes') }}">
