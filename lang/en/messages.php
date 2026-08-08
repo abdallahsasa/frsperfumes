@@ -68,4 +68,5 @@ return [
     'item_removed' => 'Item removed from cart.',
     'item_added' => 'Item added to cart.',
     'cart_updated' => 'Cart updated.',
+    'view_details' => 'View Details',
 ];

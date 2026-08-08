@@ -2,13 +2,13 @@
     $bgClass = 'bg-matte-black';
     if (is_array($perfume->season)) {
         if (in_array('summer', $perfume->season)) {
-            $bgClass = 'bg-gradient-to-br from-cyan-900/20 via-matte-black to-blue-900/20 bg-matte-black'; // Fresh/Summer
+            $bgClass = 'bg-gradient-to-br from-cyan-900/40 to-blue-900/20 bg-[#161618]'; // Fresh/Summer
         } elseif (in_array('winter', $perfume->season)) {
-            $bgClass = 'bg-gradient-to-br from-slate-800/30 via-matte-black to-indigo-900/20 bg-matte-black'; // Cold/Winter
+            $bgClass = 'bg-gradient-to-br from-slate-800/50 to-indigo-900/20 bg-[#161618]'; // Cold/Winter
         } elseif (in_array('spring', $perfume->season)) {
-            $bgClass = 'bg-gradient-to-br from-green-900/20 via-matte-black to-emerald-900/20 bg-matte-black'; // Floral/Spring
+            $bgClass = 'bg-gradient-to-br from-green-900/40 to-emerald-900/20 bg-[#161618]'; // Floral/Spring
         } elseif (in_array('autumn', $perfume->season)) {
-            $bgClass = 'bg-gradient-to-br from-orange-900/20 via-matte-black to-red-900/20 bg-matte-black'; // Warm/Autumn
+            $bgClass = 'bg-gradient-to-br from-orange-900/40 to-red-900/20 bg-[#161618]'; // Warm/Autumn
         }
     }
 @endphp

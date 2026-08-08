@@ -110,13 +110,13 @@
                             $cardBg = 'bg-[#161618]';
                             if (is_array($perfume->season)) {
                                 if (in_array('summer', $perfume->season)) {
-                                    $cardBg = 'bg-gradient-to-br from-cyan-900/10 via-[#161618] to-blue-900/10 bg-[#161618] border border-cyan-900/20 hover:border-cyan-500/30';
+                                    $cardBg = 'bg-gradient-to-br from-cyan-900/40 to-blue-900/20 bg-[#161618] border border-cyan-900/30 hover:border-cyan-500/50';
                                 } elseif (in_array('winter', $perfume->season)) {
-                                    $cardBg = 'bg-gradient-to-br from-slate-800/20 via-[#161618] to-indigo-900/10 bg-[#161618] border border-slate-700/30 hover:border-indigo-400/30';
+                                    $cardBg = 'bg-gradient-to-br from-slate-800/50 to-indigo-900/30 bg-[#161618] border border-slate-700/50 hover:border-indigo-400/50';
                                 } elseif (in_array('spring', $perfume->season)) {
-                                    $cardBg = 'bg-gradient-to-br from-green-900/10 via-[#161618] to-emerald-900/10 bg-[#161618] border border-green-900/20 hover:border-emerald-500/30';
+                                    $cardBg = 'bg-gradient-to-br from-green-900/40 to-emerald-900/20 bg-[#161618] border border-green-900/30 hover:border-emerald-500/50';
                                 } elseif (in_array('autumn', $perfume->season)) {
-                                    $cardBg = 'bg-gradient-to-br from-orange-900/10 via-[#161618] to-red-900/10 bg-[#161618] border border-orange-900/20 hover:border-orange-500/30';
+                                    $cardBg = 'bg-gradient-to-br from-orange-900/40 to-red-900/20 bg-[#161618] border border-orange-900/30 hover:border-orange-500/50';
                                 }
                             }
                         @endphp
