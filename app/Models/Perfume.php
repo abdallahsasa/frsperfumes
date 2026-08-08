@@ -39,6 +39,7 @@ class Perfume extends Model
         'source_url',
         'is_active',
         'is_featured',
+        'dupe_id',
     ];
 
     protected $casts = [
@@ -54,6 +55,16 @@ class Perfume extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function dupe(): BelongsTo
+    {
+        return $this->belongsTo(Perfume::class, 'dupe_id');
+    }
+
+    public function dupedBy(): HasMany
+    {
+        return $this->hasMany(Perfume::class, 'dupe_id');
     }
 
     public function images(): HasMany

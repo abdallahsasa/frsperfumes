@@ -37,6 +37,12 @@ class PerfumeResource extends Resource
                                             ->searchable()
                                             ->preload()
                                             ->required(),
+                                        Forms\Components\Select::make('dupe_id')
+                                            ->label('Dupe Of (Optional)')
+                                            ->relationship('dupe', 'name_en')
+                                            ->searchable()
+                                            ->preload()
+                                            ->nullable(),
                                         Forms\Components\TextInput::make('name_en')
                                             ->label('Perfume Name (English)')
                                             ->required()
