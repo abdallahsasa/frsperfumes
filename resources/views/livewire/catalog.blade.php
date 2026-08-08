@@ -106,7 +106,21 @@
             @if(count($perfumes) > 0)
                 <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 animate-fade-in">
                     @foreach($perfumes as $perfume)
-                        <div class="group relative flex flex-col justify-between bg-[#161618] transition-all duration-300 p-4 rounded-sm">
+                        @php
+                            $cardBg = 'bg-[#161618]';
+                            if (is_array($perfume->season)) {
+                                if (in_array('summer', $perfume->season)) {
+                                    $cardBg = 'bg-gradient-to-br from-cyan-900/10 via-[#161618] to-blue-900/10 bg-[#161618] border border-cyan-900/20 hover:border-cyan-500/30';
+                                } elseif (in_array('winter', $perfume->season)) {
+                                    $cardBg = 'bg-gradient-to-br from-slate-800/20 via-[#161618] to-indigo-900/10 bg-[#161618] border border-slate-700/30 hover:border-indigo-400/30';
+                                } elseif (in_array('spring', $perfume->season)) {
+                                    $cardBg = 'bg-gradient-to-br from-green-900/10 via-[#161618] to-emerald-900/10 bg-[#161618] border border-green-900/20 hover:border-emerald-500/30';
+                                } elseif (in_array('autumn', $perfume->season)) {
+                                    $cardBg = 'bg-gradient-to-br from-orange-900/10 via-[#161618] to-red-900/10 bg-[#161618] border border-orange-900/20 hover:border-orange-500/30';
+                                }
+                            }
+                        @endphp
+                        <div class="group relative flex flex-col justify-between {{ $cardBg }} transition-all duration-300 p-4 rounded-sm">
                             <!-- Image Area -->
                             <div class="relative w-full aspect-square bg-transparent overflow-hidden mb-4 p-4 flex items-center justify-center">
                                 @if($perfume->images->count() > 0)

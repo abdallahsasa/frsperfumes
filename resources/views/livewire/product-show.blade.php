@@ -1,4 +1,18 @@
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 bg-matte-black text-gray-200">
+@php
+    $bgClass = 'bg-matte-black';
+    if (is_array($perfume->season)) {
+        if (in_array('summer', $perfume->season)) {
+            $bgClass = 'bg-gradient-to-br from-cyan-900/20 via-matte-black to-blue-900/20 bg-matte-black'; // Fresh/Summer
+        } elseif (in_array('winter', $perfume->season)) {
+            $bgClass = 'bg-gradient-to-br from-slate-800/30 via-matte-black to-indigo-900/20 bg-matte-black'; // Cold/Winter
+        } elseif (in_array('spring', $perfume->season)) {
+            $bgClass = 'bg-gradient-to-br from-green-900/20 via-matte-black to-emerald-900/20 bg-matte-black'; // Floral/Spring
+        } elseif (in_array('autumn', $perfume->season)) {
+            $bgClass = 'bg-gradient-to-br from-orange-900/20 via-matte-black to-red-900/20 bg-matte-black'; // Warm/Autumn
+        }
+    }
+@endphp
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 {{ $bgClass }} text-gray-200">
     <!-- Success Alert -->
     @if($successMessage)
         <div
