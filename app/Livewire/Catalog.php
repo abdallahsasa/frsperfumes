@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Brand;
 use App\Models\Perfume;
+use App\Services\CartService;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 
@@ -21,17 +22,36 @@ class Catalog extends Component
     #[Url(as: 'concentration')]
     public string $selectedConcentration = '';
 
+    #[Url(as: 'season')]
+    public string $selectedSeason = '';
+
     #[Url(as: 'sort')]
     public string $sortBy = 'featured';
 
+    public string $successMessage = '';
+
     public function resetFilters(): void
     {
-        $this->reset(['search', 'selectedBrand', 'selectedGender', 'selectedConcentration', 'sortBy']);
+        $this->reset(['search', 'selectedBrand', 'selectedGender', 'selectedConcentration', 'selectedSeason', 'sortBy']);
+    }
+
+    public function quickAddToCart(int $perfumeId, CartService $cartService): void
+    {
+        $perfume = Perfume::find($perfumeId);
+
+        if (!$perfume || $perfume->stock_status === 'out_of_stock') {
+            return;
+        }
+
+        $cartService->add($perfume->id, 1);
+        $this->dispatch('cartUpdated');
+
+        $this->successMessage = __('messages.item_added');
     }
 
     public function render()
     {
-        $query = Perfume::with(['brand', 'images'])
+        $query = Perfume::with(['brand', 'images', 'dupe'])
             ->where('is_active', true);
 
         // Apply Search Filter
@@ -66,6 +86,11 @@ class Catalog extends Component
             $query->where('concentration', $this->selectedConcentration);
         }
 
+        // Apply Season Filter
+        if (!empty($this->selectedSeason)) {
+            $query->whereJsonContains('season', $this->selectedSeason);
+        }
+
         // Apply Sorting
         if ($this->sortBy === 'price_asc') {
             $query->orderBy('price', 'asc');
@@ -81,9 +106,18 @@ class Catalog extends Component
         $perfumes = $query->get();
         $brands = Brand::where('is_active', true)->get();
 
+        $activeFilterCount = collect([
+            $this->search,
+            $this->selectedBrand,
+            $this->selectedGender,
+            $this->selectedConcentration,
+            $this->selectedSeason,
+        ])->filter(fn ($val) => !empty($val))->count();
+
         return view('livewire.catalog', [
             'perfumes' => $perfumes,
             'brands' => $brands,
+            'activeFilterCount' => $activeFilterCount,
         ]);
     }
 }
